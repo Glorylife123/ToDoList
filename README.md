@@ -1,59 +1,71 @@
-# 待办事项列表 (Todo List)
+# Todo List
 
-一个简洁美观的待办事项 Web 应用，支持多语言和任务管理功能。
+A modern, clean Todo List web application with multilingual support and comprehensive task management features.
 
-## 功能特性
+## Features
 
-- 添加任务 - 输入新任务并添加到列表
-- 删除任务 - 移除不需要的任务
-- 标记完成 - 点击复选框标记任务完成状态
-- 任务筛选 - 查看全部、待完成或已完成任务
-- 统计面板 - 实时显示总任务数、已完成和待完成数量
-- 多语言支持 - 支持中文/英文切换
-- 数据持久化 - 使用 localStorage 保存数据，刷新页面不丢失
-- 响应式设计 - 适配桌面和移动设备
+- **Add Tasks** - Create new tasks with a single click or press Enter
+- **Delete Tasks** - Remove tasks you no longer need
+- **Mark Complete** - Toggle task completion status with checkboxes
+- **Task Filtering** - View All, Pending, or Completed tasks
+- **Search** - Quickly find tasks by keyword
+- **Statistics Panel** - Real-time display of total, completed, and pending task counts
+- **Multilingual Support** - Switch between Chinese and English instantly
+- **Data Persistence** - Tasks are saved to localStorage and survive page refreshes
+- **Responsive Design** - Works seamlessly on desktop and mobile devices
+- **Accessibility** - ARIA labels and keyboard navigation support
 
-## 项目结构
+## Project Structure
 
 ```
 ToDoList/
-├── index.html      # 主页面
+├── index.html      # Main HTML page
 ├── css/
-│   └── style.css   # 样式文件
-└── js/
-    └── app.js      # 应用逻辑
+│   └── style.css   # Styles and animations
+├── js/
+│   └── app.js      # Application logic
+└── README.md       # This file
 ```
 
-## 快速开始
+## Getting Started
 
-1. 克隆或下载本项目
-2. 直接在浏览器中打开 `index.html` 文件即可使用
+1. Clone or download this repository
+2. Open `index.html` in your web browser
 
-无需安装任何依赖或服务器环境。
+No installation, dependencies, or server setup required.
 
-## 技术栈
+## Tech Stack
 
-- **HTML5** - 页面结构
-- **CSS3** - 样式与动画
-- **JavaScript (ES6+)** - 应用逻辑
-- **LocalStorage** - 数据存储
+- **HTML5** - Semantic markup
+- **CSS3** - Modern styling with animations
+- **JavaScript (ES6+)** - Application logic
+- **LocalStorage API** - Data persistence
 
-## 使用说明
+## Usage
 
-### 添加任务
-1. 在输入框中输入任务内容
-2. 点击 "+" 按钮或按 Enter 键添加
+### Adding a Task
 
-### 管理任务
-- 点击复选框标记任务完成/未完成
-- 点击 "删除" 按钮移除任务
+1. Type your task in the input field
+2. Click the "+" button or press Enter
 
-### 筛选任务
-- 点击底部的筛选按钮切换视图
-- 可选：全部 / 待完成 / 已完成
+### Managing Tasks
 
-### 切换语言
-- 点击右上角的语言按钮在中英文之间切换
+- Click the checkbox to mark a task as complete/incomplete
+- Click the "Delete" button to remove a task
+
+### Filtering Tasks
+
+- Click the filter buttons at the bottom to switch views
+- Options: All / Pending / Completed
+
+### Searching Tasks
+
+- Type in the search box to filter tasks by keyword
+- Click the clear button to reset the search
+
+### Changing Language
+
+- Click the language toggle button in the top-right corner to switch between Chinese and English
 
 ## License
 
