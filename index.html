@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>待办事项列表</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <button id="langToggle" class="lang-toggle" aria-label="切换语言">
+        <span class="lang-zh">中文</span>
+        <span class="lang-en">EN</span>
+    </button>
+
+    <div class="container">
+        <header>
+            <h1>📝 <span data-i18n="title">待办事项列表</span></h1>
+        </header>
+
+        <div class="input-section">
+            <input type="text" id="taskInput" placeholder="输入新任务..." data-placeholder-i18n="inputPlaceholder" autofocus>
+            <button id="addBtn" aria-label="添加任务">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+            </button>
+        </div>
+
+        <div class="stats">
+            <div class="stat-item">
+                <span class="stat-label" data-i18n="total">总任务</span>
+                <span class="stat-value" id="totalTasks">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label" data-i18n="completed">已完成</span>
+                <span class="stat-value completed" id="completedTasks">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label" data-i18n="pending">待完成</span>
+                <span class="stat-value pending" id="pendingTasks">0</span>
+            </div>
+        </div>
+
+        <ul id="taskList" aria-label="任务列表"></ul>
+
+        <div class="filter-section">
+            <button class="filter-btn active" data-filter="all" data-i18n="filterAll">全部</button>
+            <button class="filter-btn" data-filter="pending" data-i18n="filterPending">待完成</button>
+            <button class="filter-btn" data-filter="completed" data-i18n="filterCompleted">已完成</button>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
