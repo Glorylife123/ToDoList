@@ -56,6 +56,7 @@ const elements = {
     taskInput: document.getElementById('taskInput'),
     addBtn: document.getElementById('addBtn'),
     searchInput: document.getElementById('searchInput'),
+    clearSearchBtn: document.getElementById('clearSearchBtn'),
     taskList: document.getElementById('taskList'),
     totalTasks: document.getElementById('totalTasks'),
     completedTasks: document.getElementById('completedTasks'),
@@ -295,6 +296,13 @@ const Handlers = {
 
     onLangToggle() {
         I18n.toggle();
+    },
+
+    onClearSearch() {
+        elements.searchInput.value = '';
+        state.searchQuery = '';
+        UI.render();
+        elements.searchInput.focus();
     }
 };
 
@@ -322,6 +330,9 @@ const App = {
         elements.searchInput.addEventListener('input', (e) => {
             Handlers.onSearchChange(e.target.value);
         });
+
+        // 清除搜索
+        elements.clearSearchBtn.addEventListener('click', () => Handlers.onClearSearch());
 
         // 筛选切换
         elements.filterBtns.forEach(btn => {
