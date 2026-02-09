@@ -5,6 +5,7 @@ const i18n = {
     zh: {
         title: '待办事项列表',
         inputPlaceholder: '输入新任务...',
+        searchPlaceholder: '搜索任务...',
         total: '总任务',
         completed: '已完成',
         pending: '待完成',
@@ -15,6 +16,7 @@ const i18n = {
         emptyAll: '还没有任务，添加一个吧！',
         emptyCompleted: '还没有已完成的任务',
         emptyPending: '太棒了！没有待完成的任务',
+        emptySearch: '没有找到匹配的任务',
         ariaMarkComplete: '标记任务完成',
         ariaDeleteTask: '删除任务',
         ariaToggleLang: '切换语言'
@@ -22,6 +24,7 @@ const i18n = {
     en: {
         title: 'Todo List',
         inputPlaceholder: 'Enter new task...',
+        searchPlaceholder: 'Search tasks...',
         total: 'Total',
         completed: 'Done',
         pending: 'Pending',
@@ -32,6 +35,7 @@ const i18n = {
         emptyAll: 'No tasks yet, add one!',
         emptyCompleted: 'No completed tasks yet',
         emptyPending: 'Great! No pending tasks',
+        emptySearch: 'No matching tasks found',
         ariaMarkComplete: 'Mark task as complete',
         ariaDeleteTask: 'Delete task',
         ariaToggleLang: 'Toggle language'
@@ -42,6 +46,7 @@ const i18n = {
 const state = {
     tasks: [],
     currentFilter: 'all',
+    searchQuery: '',
     lang: 'zh'
 };
 
@@ -50,6 +55,7 @@ const elements = {
     langToggle: document.getElementById('langToggle'),
     taskInput: document.getElementById('taskInput'),
     addBtn: document.getElementById('addBtn'),
+    searchInput: document.getElementById('searchInput'),
     taskList: document.getElementById('taskList'),
     totalTasks: document.getElementById('totalTasks'),
     completedTasks: document.getElementById('completedTasks'),
@@ -148,14 +154,25 @@ const TaskActions = {
     },
 
     getFilteredTasks() {
+        let tasks = state.tasks;
+
+        // 先应用筛选
         switch (state.currentFilter) {
             case 'completed':
-                return state.tasks.filter(t => t.completed);
+                tasks = tasks.filter(t => t.completed);
+                break;
             case 'pending':
-                return state.tasks.filter(t => !t.completed);
-            default:
-                return state.tasks;
+                tasks = tasks.filter(t => !t.completed);
+                break;
         }
+
+        // 再应用搜索
+        if (state.searchQuery.trim()) {
+            const query = state.searchQuery.toLowerCase();
+            tasks = tasks.filter(t => t.text.toLowerCase().includes(query));
+        }
+
+        return tasks;
     },
 
     getStats() {
@@ -202,6 +219,20 @@ const UI = {
     },
 
     renderEmptyState() {
+        // 如果有搜索查询，显示搜索无结果消息
+        if (state.searchQuery.trim()) {
+            elements.taskList.innerHTML = `
+                <li class="empty-state">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <p>${I18n.t('emptySearch')}</p>
+                </li>
+            `;
+            return;
+        }
+
         const messages = {
             all: 'emptyAll',
             completed: 'emptyCompleted',
@@ -257,6 +288,11 @@ const Handlers = {
         UI.render();
     },
 
+    onSearchChange(query) {
+        state.searchQuery = query;
+        UI.render();
+    },
+
     onLangToggle() {
         I18n.toggle();
     }
@@ -280,6 +316,11 @@ const App = {
         elements.addBtn.addEventListener('click', () => Handlers.onAddTask());
         elements.taskInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') Handlers.onAddTask();
+        });
+
+        // 搜索任务
+        elements.searchInput.addEventListener('input', (e) => {
+            Handlers.onSearchChange(e.target.value);
         });
 
         // 筛选切换
